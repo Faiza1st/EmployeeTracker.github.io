@@ -83,3 +83,49 @@ function questionUser() {
     });
 };
 
+function viewDepartments() {
+  console.log('Showing All Departments');
+  const query = 'SELECT * FROM department';
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    questionUser();
+  });
+}
+
+function viewEmployees() {
+  console.log('Showing all Employees');
+  const query = 'SELECT * FROM employee';
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    questionUser();
+  });
+}
+
+function viewRoles() {
+  console.log('Showing all Roles');
+  const query = 'SELECT * FROM role';
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    questionUser();
+  });
+}
+
+function addingDepartment() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'addingDep',
+      message: 'What department will you like to add?',
+    }
+  ]).then(answer => {
+    const query = `INSERT INTO department (name) VALUES ("${answer.addingDep}")`; 
+    connection.query(query, (err, res) => {
+      if (err) throw err;
+      questionUser();
+    });
+  });
+}
+
